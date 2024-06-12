@@ -1,0 +1,9 @@
+{
+  "name": "animation-scheme-editor",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "StarPanda",
+  "scripts": {}
+}
