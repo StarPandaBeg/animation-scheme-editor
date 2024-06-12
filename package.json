@@ -5,5 +5,13 @@
     "packages/*"
   ],
   "author": "StarPanda",
-  "scripts": {}
+  "scripts": {
+    "core:build": "npm run build -w packages/core",
+    "core:dev": "npm run dev -w packages/core",
+    "ui:build": "npm run build -w packages/ui",
+    "ui:dev": "npm run dev -w packages/ui"
+  },
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
 }
