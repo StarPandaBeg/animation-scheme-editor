@@ -1,9 +1,9 @@
-import { render } from "preact";
+import {render} from 'preact';
 
-import "./assets/sass/style.scss";
-import AppLayout from "./components/app/layout";
-import AppNavigationBar from "./components/app/navigation";
-import AppFooter from "./components/app/layout/footer";
+import './assets/sass/style.scss';
+import AppLayout from './components/app/layout';
+import AppFooter from './components/app/layout/footer';
+import AppNavigationBar from './components/app/navigation';
 
 export function App() {
   return (
@@ -15,4 +15,4 @@ export function App() {
   );
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));

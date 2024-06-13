@@ -1,7 +1,7 @@
-import type { InferCustomEventPayload } from "vite";
+import type {InferCustomEventPayload} from 'vite';
 
-export const EventName = "scheme-editor:event";
-export const EventAckName = "scheme-editor:event-ack";
+export const EventName = 'scheme-editor:event';
+export const EventAckName = 'scheme-editor:event-ack';
 
 export interface WSSocket {
   on<T extends string>(cb: InferCustomEventPayload<T>, event?: T): void;
@@ -10,5 +10,5 @@ export interface WSSocket {
   send<T extends string>(data: InferCustomEventPayload<T>, event?: T): void;
 }
 
-export * from "./server";
-export * from "./client";
+export * from './client';
+export * from './server';

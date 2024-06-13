@@ -1,11 +1,11 @@
-import { ComponentChildren } from "preact";
+import {ComponentChildren} from 'preact';
 
-import "./layout.scss";
+import './layout.scss';
 
 type AppLayoutProps = {
   children: ComponentChildren;
 };
 
-export default function AppLayout({ children }: AppLayoutProps) {
+export default function AppLayout({children}: AppLayoutProps) {
   return <section class="app-root">{children}</section>;
 }

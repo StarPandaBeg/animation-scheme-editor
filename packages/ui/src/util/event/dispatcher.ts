@@ -10,7 +10,7 @@ export interface EventHandler<T> {
  */
 export abstract class EventDispatcherBase<
   TValue,
-  THandler extends EventHandler<TValue> = EventHandler<TValue>
+  THandler extends EventHandler<TValue> = EventHandler<TValue>,
 > {
   public readonly subscribable: Subscribable<TValue, THandler> =
     new Subscribable(this);
@@ -41,7 +41,7 @@ export abstract class EventDispatcherBase<
   }
 
   protected notifySubscribers(value: TValue): ReturnType<THandler>[] {
-    return [...this.subscribers].map((handler) => handler(value));
+    return [...this.subscribers].map(handler => handler(value));
   }
 }
 
@@ -57,10 +57,10 @@ export abstract class EventDispatcherBase<
  */
 export class Subscribable<
   TValue,
-  THandler extends EventHandler<TValue> = EventHandler<TValue>
+  THandler extends EventHandler<TValue> = EventHandler<TValue>,
 > {
   public constructor(
-    protected dispatcher: EventDispatcherBase<TValue, THandler>
+    protected dispatcher: EventDispatcherBase<TValue, THandler>,
   ) {}
 
   /**

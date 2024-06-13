@@ -1,4 +1,4 @@
-import { PingModule } from "./modules/ping";
+import {PingModule} from './modules/ping';
 
 type Repository = {
   ping: PingModule;
@@ -6,10 +6,10 @@ type Repository = {
 
 const useRepository = () => {
   const modules: Repository = {
-    ping: new PingModule("ping"),
+    ping: new PingModule('ping'),
   };
 
-  return { api: modules };
+  return {api: modules};
 };
 
 export default useRepository;

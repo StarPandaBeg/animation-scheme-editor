@@ -1,21 +1,21 @@
 @function step($a: 1, $b: null, $c: null, $d: null) {
   $result: ();
-  
+
   @if $a != null {
     $result: append($result, $a * $padding-step);
   }
-  
+
   @if $b != null {
     $result: append($result, $b * $padding-step);
   }
-  
+
   @if $c != null {
     $result: append($result, $c * $padding-step);
   }
-  
+
   @if $d != null {
     $result: append($result, $d * $padding-step);
   }
-  
+
   @return $result;
 }

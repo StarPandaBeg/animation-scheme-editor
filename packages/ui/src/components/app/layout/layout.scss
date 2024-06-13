@@ -5,7 +5,7 @@
   grid-template-columns: 64px 1fr;
   grid-template-rows: 1fr min-content;
 
-  grid-template-areas: 
-    "navigation viewport"
-    "footer footer";
+  grid-template-areas:
+    'navigation viewport'
+    'footer footer';
 }
