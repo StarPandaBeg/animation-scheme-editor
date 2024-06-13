@@ -1,24 +1,28 @@
 {
-	"name": "@animation-scheme-editor/ui",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"preview": "vite preview"
-	},
-	"dependencies": {
-		"preact": "^10.20.0",
-		"@animation-scheme-editor/core": "*"
-	},
-	"devDependencies": {
-		"@preact/preset-vite": "^2.8.2",
-		"eslint": "^8.57.0",
-		"eslint-config-preact": "^1.4.0",
-		"typescript": "^5.4.5",
-		"vite": "^5.2.2"
-	},
-	"eslintConfig": {
-		"extends": "preact"
-	}
+  "name": "@animation-scheme-editor/ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@animation-scheme-editor/core": "*",
+    "preact": "^10.20.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.8.2",
+    "@types/node": "^20.14.2",
+    "eslint": "^8.57.0",
+    "eslint-config-preact": "^1.4.0",
+    "sass": "^1.77.5",
+    "sass-loader": "^14.2.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.2"
+  },
+  "eslintConfig": {
+    "extends": "preact"
+  }
 }

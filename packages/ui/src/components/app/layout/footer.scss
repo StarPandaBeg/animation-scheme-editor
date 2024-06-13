@@ -1,0 +1,10 @@
+.app-footer {
+  padding: step(1, 2);
+
+  display: flex;
+  justify-content: space-between;
+  grid-area: footer;
+
+  background-color: $color-overlay-1;
+  border: 1px solid $color-base;
+}
