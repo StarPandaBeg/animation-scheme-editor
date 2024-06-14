@@ -1,6 +1,6 @@
+import type {Stage} from '@animation-scheme-editor/core';
 import {JSX} from 'preact';
 import {useLayoutEffect, useRef} from 'preact/hooks';
-import type {Stage} from './stage';
 
 interface StageViewProps extends JSX.HTMLAttributes<HTMLDivElement> {
   stage: Stage;
