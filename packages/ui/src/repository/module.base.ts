@@ -1,5 +1,5 @@
+import {EventDispatcher} from '@animation-scheme-editor/core';
 import {EventBase} from '../types/event.type';
-import {EventDispatcher} from '../util/event/dispatcher';
 import {EventAckName, WSClientSocket, WSSocket} from '../util/ws';
 
 export abstract class RepositoryModule<T extends EventBase> {
