@@ -1,14 +1,18 @@
 import {render} from 'preact';
 
-import {Player, Scene} from '@animation-scheme-editor/core';
+import {Player, Scene, Vector2} from '@animation-scheme-editor/core';
 import './assets/sass/style.scss';
 import AppLayout from './components/app/layout';
 import AppFooter from './components/app/layout/footer';
 import AppNavigationBar from './components/app/navigation';
 import Viewport from './components/viewport';
-import {ApplicationProvider} from './contexts/app';
+import {ApplicationProvider, Settings} from './contexts/app';
 
 export function App() {
+  const settings: Settings = {
+    background: 'white',
+    size: new Vector2(1920, 1080),
+  };
   const scene = new Scene();
   const player = new Player(scene);
 
@@ -17,6 +21,7 @@ export function App() {
       value={{
         scene,
         player,
+        settings,
       }}
     >
       <AppLayout>

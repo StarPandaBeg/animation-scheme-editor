@@ -8,8 +8,9 @@ import StageView from './stage/stage-view';
 interface ViewportCanvasProps extends JSX.HTMLAttributes<HTMLDivElement> {}
 
 export default function ViewportCanvas(props: ViewportCanvasProps) {
-  const {player} = useApplicationContext();
+  const {player, settings} = useApplicationContext();
   const [stage] = useState(() => new Stage());
+  stage.configure(settings);
 
   useSubscribable(
     player.onRender,
