@@ -13,4 +13,8 @@
     top: 0;
     bottom: 0;
   }
+
+  canvas {
+    image-rendering: pixelated;
+  }
 }
