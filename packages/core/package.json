@@ -7,7 +7,11 @@
     "dev": "tspc -p tsconfig.json -w"
   },
   "devDependencies": {
+    "@types/chroma-js": "^2.4.4",
     "rollup": "^4.18.0",
     "ts-patch": "^3.2.0"
+  },
+  "dependencies": {
+    "chroma-js": "^2.4.2"
   }
 }
