@@ -6,6 +6,7 @@
   ],
   "author": "StarPanda",
   "scripts": {
+    "prepare": "husky install",
     "core:build": "npm run build -w packages/core",
     "core:dev": "npm run dev -w packages/core",
     "ui:build": "npm run build -w packages/ui",
