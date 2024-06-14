@@ -1,13 +1,13 @@
 import {ViewportProvider, ViewportState} from '@/contexts/viewport';
+import {useDrag} from '@/hooks/useDrag';
 import {constrain} from '@/util/math';
 import {JSX} from 'preact';
-import {useMemo, useRef, useState} from 'preact/hooks';
+import {useCallback, useMemo, useRef, useState} from 'preact/hooks';
 import ViewportCanvas from './canvas';
+import './viewport.scss';
 
 const ZOOM_MIN = 0.1;
 const ZOOM_MAX = 600;
-
-import './viewport.scss';
 
 export default function Viewport() {
   const container = useRef<HTMLDivElement>();
@@ -21,7 +21,23 @@ export default function Viewport() {
     };
   }, [position, zoom]);
 
+  const [handleDrag, isDragging] = useDrag(
+    useCallback(
+      (x, y) => {
+        setZoom(state.zoom);
+        setPosition({
+          x: state.x + x,
+          y: state.y + y,
+        });
+      },
+      [state],
+    ),
+    undefined,
+    null,
+  );
+
   const onWheel = (event: JSX.TargetedWheelEvent<HTMLDivElement>) => {
+    if (isDragging) return;
     const rect = container.current.getBoundingClientRect();
     const pointer = {
       x: event.x - rect.x - rect.width / 2,
@@ -49,7 +65,15 @@ export default function Viewport() {
             transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
           }}
         />
-        <div className="viewport__overlay" onWheel={onWheel}></div>
+        <div
+          className="viewport__overlay"
+          onMouseDown={event => {
+            if (event.button === 1 || (event.button === 0 && event.shiftKey)) {
+              handleDrag(event);
+            }
+          }}
+          onWheel={onWheel}
+        ></div>
       </div>
     </ViewportProvider>
   );
