@@ -1,18 +1,28 @@
-import {
-  Accessor,
-  AccessorPropertyGetter,
-  AccessorPropertySetter,
-} from './accessor.type';
+export interface AccessorGetter<TValue> {
+  (): TValue;
+}
+
+export interface AccessorSetter<TValue> {
+  (value: TValue): void;
+}
+
+export interface Accessor<TGetter, TSetter = TGetter>
+  extends AccessorGetter<TGetter>,
+    AccessorSetter<TSetter> {}
+
+export type AccessorPropertyGetter<TTarget, TGetter> = (
+  target: TTarget,
+  key: string,
+) => TGetter;
+
+export type AccessorPropertySetter<TTarget, TValue> = (
+  target: TTarget,
+  key: string,
+  value: TValue,
+) => void;
 
 export function privateKeyFor(key: string) {
   return `_${key}`;
-}
-
-export function accessor<T>(initialValue?: T) {
-  return (target: any, key: string) => {
-    createAccessorField(target, key, initialValue);
-    target[key] = accessorFor<T>(target, key);
-  };
 }
 
 export function createAccessorField<TValue>(

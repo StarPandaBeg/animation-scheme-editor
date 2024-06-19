@@ -1,33 +1,25 @@
-import {ClassKeys} from '../../types/class-helper.type';
+import {ClassKeys, Fields} from '../../types/class-helper.type';
 import {PossibleVector2, Vector2} from '../math';
-import {accessorFor, createAccessorField} from './accessor';
-import {Accessor} from './accessor.type';
+import {
+  Accessor,
+  AccessorGetter,
+  AccessorSetter,
+  accessorFor,
+} from './accessor';
 
-type Vector2Key = ClassKeys<Vector2>;
+export interface Vector2AccessorGetter extends AccessorGetter<Vector2> {}
 
-export function vector2Accessor(
-  initialValue: PossibleVector2 = Vector2.zero,
-  fields: Vector2Key[] = ['x', 'y'],
-) {
-  return (target: any, key: string) => {
-    const vector = new Vector2(initialValue);
-    const vectorSetter = (t: any, k: string, v: PossibleVector2) =>
-      (t[k] = new Vector2(v));
+export interface Vector2AccessorSetter
+  extends AccessorSetter<PossibleVector2> {}
 
-    createAccessorField<Vector2>(target, key, vector);
-    const vectorAccessor = accessorFor<Vector2, PossibleVector2>(
-      target,
-      key,
-      null,
-      vectorSetter,
-    );
+export type Vector2Accessor<TFields extends string[] = ['x', 'y']> =
+  Vector2AccessorGetter &
+    Vector2AccessorSetter &
+    Fields<TFields, Accessor<number>>;
 
-    target[key] = vectorAccessor;
-    createVectorFieldAccessors(target, key, vectorAccessor, fields);
-  };
-}
+export type Vector2Key = ClassKeys<Vector2>;
 
-function createVectorFieldAccessors(
+export function createVectorFieldAccessors(
   target: any,
   key: string,
   accessor: Accessor<Vector2, PossibleVector2>,
