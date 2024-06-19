@@ -1,6 +1,12 @@
 import {accessor} from '../decorators';
 import {Accessor, PossibleColor, resolveColor} from '../util';
-import {Layout} from './layout';
+import {Layout, LayoutProps} from './layout';
+
+export interface ShapeProps extends LayoutProps {
+  fill: PossibleColor;
+  stroke: PossibleColor;
+  lineWidth: number;
+}
 
 export class Shape extends Layout {
   @accessor()
@@ -11,6 +17,10 @@ export class Shape extends Layout {
 
   @accessor(0)
   public declare readonly lineWidth: Accessor<number>;
+
+  public constructor(props: Partial<LayoutProps>) {
+    super(props);
+  }
 
   protected override draw(context: CanvasRenderingContext2D) {
     this.drawShape(context);

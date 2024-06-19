@@ -1,6 +1,20 @@
 import {accessor, vector2Accessor} from '../decorators';
-import {Accessor, Vector2, Vector2Accessor, initialize} from '../util';
+import {
+  Accessor,
+  PossibleVector2,
+  Vector2,
+  Vector2Accessor,
+  initialize,
+  setupAccessors,
+} from '../util';
 import {NodeChildren} from './types';
+
+export interface NodeProps {
+  children: NodeChildren;
+
+  position: PossibleVector2;
+  scale: PossibleVector2;
+}
 
 export class Node {
   @accessor([])
@@ -22,8 +36,9 @@ export class Node {
     return this.position.y;
   }
 
-  public constructor() {
+  public constructor(props: Partial<NodeProps> = {}) {
     initialize(this);
+    setupAccessors(this, props);
   }
 
   public localToParent(): DOMMatrix {
