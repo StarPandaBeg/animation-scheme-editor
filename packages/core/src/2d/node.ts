@@ -7,7 +7,7 @@ import {
   initialize,
   setupAccessors,
 } from '../util';
-import {NodeChildren} from './types';
+import {NodeChild, NodeChildren} from './types';
 
 export interface NodeProps {
   children: NodeChildren;
@@ -17,8 +17,11 @@ export interface NodeProps {
 }
 
 export class Node {
+  @accessor(null)
+  public declare readonly parent: Accessor<Node | null>;
+
   @accessor([])
-  public declare readonly children: Accessor<NodeChildren>;
+  public declare readonly children: Accessor<Node[], NodeChildren>;
 
   /** Represents the position of this node in local space of its parent. */
   @vector2Accessor()
@@ -39,6 +42,39 @@ export class Node {
   public constructor(props: Partial<NodeProps> = {}) {
     initialize(this);
     setupAccessors(this, props);
+  }
+
+  public add(node: NodeChildren) {
+    return this.insert(node, Infinity);
+  }
+
+  public insert(node: NodeChildren, index: number = 0) {
+    const array: NodeChild[] = Array.isArray(node) ? node : [node];
+    if (array.length === 0) return this;
+
+    const children = this.children();
+    const newChildren = children.slice(0, index);
+
+    for (const node of array) {
+      if (node instanceof Node) {
+        newChildren.push(node);
+        node.remove();
+        node.parent(this);
+      }
+    }
+
+    newChildren.push(...children.slice(index));
+    this.children(newChildren);
+
+    return this;
+  }
+
+  public remove() {
+    const parent = this.parent();
+    if (parent === null) return this;
+
+    parent.removeChild(this);
+    return this;
   }
 
   public localToParent(): DOMMatrix {
@@ -72,6 +108,10 @@ export class Node {
     const children = this.children();
     if (Array.isArray(children)) return children;
     return [children];
+  }
+
+  protected removeChild(child: NodeChild) {
+    this.children(this.children().filter(node => node !== child));
   }
 
   protected transformContext(context: CanvasRenderingContext2D) {
