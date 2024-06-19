@@ -17,7 +17,14 @@ export default defineConfig({
     // eslint-disable-next-line @typescript-eslint/naming-convention
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
   },
-  plugins: [preact(), editorServerPlugin()],
+  plugins: [
+    preact({
+      babel: {
+        plugins: [['@babel/plugin-proposal-decorators', {legacy: true}]],
+      },
+    }),
+    editorServerPlugin(),
+  ],
   resolve: {
     alias: [
       {

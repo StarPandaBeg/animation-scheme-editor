@@ -13,6 +13,7 @@
     "preact": "^10.20.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.24.7",
     "@preact/preset-vite": "^2.8.2",
     "@types/node": "^20.14.2",
     "eslint": "^8.57.0",

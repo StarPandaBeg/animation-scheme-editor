@@ -6,6 +6,7 @@
     "noEmit": true,
     "allowJs": true,
     "checkJs": true,
+    "experimentalDecorators": true,
 
     /* Preact Config */
     "jsx": "react-jsx",
