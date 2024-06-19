@@ -1,7 +1,21 @@
+import {Node} from '../../2d';
+
 export class Scene {
+  private nodes: Array<Node>;
+
+  constructor() {
+    this.nodes = [];
+  }
+
+  addNode(node: Node) {
+    this.nodes.push(node);
+  }
+
   async render(context: CanvasRenderingContext2D) {
-    // TODO: Render pipeline
-    context.fillStyle = 'red';
-    context.fillRect(0, 0, 50, 50);
+    for (const node of this.nodes) {
+      context.save();
+      node.render(context);
+      context.restore();
+    }
   }
 }
