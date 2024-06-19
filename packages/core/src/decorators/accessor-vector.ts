@@ -6,6 +6,7 @@ import {
   addInitializer,
   createAccessorField,
   createVectorFieldAccessors,
+  registerAccessor,
 } from '../util';
 
 export function vector2Accessor(
@@ -14,6 +15,8 @@ export function vector2Accessor(
 ) {
   return (target: any, key: string) => {
     addInitializer(target, (instance: any) => {
+      registerAccessor(instance, key);
+
       const vector = new Vector2(initialValue);
       const vectorSetter = (t: any, k: string, v: PossibleVector2) =>
         (t[k] = new Vector2(v));
