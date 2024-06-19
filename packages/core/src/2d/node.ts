@@ -1,5 +1,5 @@
 import {accessor, vector2Accessor} from '../decorators';
-import {Accessor, Vector2, Vector2Accessor} from '../util';
+import {Accessor, Vector2, Vector2Accessor, initialize} from '../util';
 import {NodeChildren} from './types';
 
 export class Node {
@@ -20,6 +20,10 @@ export class Node {
 
   public get y() {
     return this.position.y;
+  }
+
+  public constructor() {
+    initialize(this);
   }
 
   render(context: CanvasRenderingContext2D) {

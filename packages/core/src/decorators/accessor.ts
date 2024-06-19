@@ -1,8 +1,10 @@
-import {accessorFor, createAccessorField} from '../util';
+import {accessorFor, addInitializer, createAccessorField} from '../util';
 
 export function accessor<T>(initialValue?: T) {
   return (target: any, key: string) => {
-    createAccessorField(target, key, initialValue);
-    target[key] = accessorFor<T>(target, key);
+    addInitializer(target, (instance: any) => {
+      createAccessorField(instance, key, initialValue);
+      instance[key] = accessorFor<T>(instance, key);
+    });
   };
 }
