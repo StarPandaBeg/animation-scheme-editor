@@ -6,5 +6,8 @@ export function useSubscribable<TValue, THandler extends EventHandler<TValue>>(
   handler: THandler,
   inputs: Inputs,
 ) {
-  useEffect(() => event?.subscribe(handler), [event, ...inputs]);
+  useEffect(() => {
+    event.subscribe(handler);
+    return () => event.unsubscribe(handler);
+  }, [event, ...inputs]);
 }
