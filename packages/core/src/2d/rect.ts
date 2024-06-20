@@ -4,7 +4,7 @@ import {Shape, ShapeProps} from './shape';
 export interface RectProps extends ShapeProps {}
 
 export class Rect extends Shape {
-  public constructor(props: Partial<RectProps> = {}) {
+  public constructor(props: RectProps = {}) {
     super(props);
   }
 

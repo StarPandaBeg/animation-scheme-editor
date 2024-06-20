@@ -3,9 +3,9 @@ import {Accessor, PossibleColor, resolveColor} from '../util';
 import {Layout, LayoutProps} from './layout';
 
 export interface ShapeProps extends LayoutProps {
-  fill: PossibleColor;
-  stroke: PossibleColor;
-  lineWidth: number;
+  fill?: PossibleColor;
+  stroke?: PossibleColor;
+  lineWidth?: number;
 }
 
 export class Shape extends Layout {
@@ -18,7 +18,7 @@ export class Shape extends Layout {
   @accessor(0)
   public declare readonly lineWidth: Accessor<number>;
 
-  public constructor(props: Partial<LayoutProps>) {
+  public constructor(props: LayoutProps = {}) {
     super(props);
   }
 

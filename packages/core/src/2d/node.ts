@@ -10,10 +10,10 @@ import {
 import {NodeChild, NodeChildren} from './types';
 
 export interface NodeProps {
-  children: NodeChildren;
+  children?: NodeChildren;
 
-  position: PossibleVector2;
-  scale: PossibleVector2;
+  position?: PossibleVector2;
+  scale?: PossibleVector2;
 }
 
 export class Node {
@@ -39,7 +39,7 @@ export class Node {
     return this.position.y;
   }
 
-  public constructor(props: Partial<NodeProps> = {}) {
+  public constructor(props: NodeProps = {}) {
     initialize(this);
     setupAccessors(this, props);
   }
