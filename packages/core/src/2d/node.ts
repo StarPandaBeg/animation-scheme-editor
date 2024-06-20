@@ -1,4 +1,4 @@
-import {accessor, vector2Accessor} from '../decorators';
+import {accessor, propertyAccessor, vector2Accessor} from '../decorators';
 import {
   Accessor,
   PossibleVector2,
@@ -14,6 +14,9 @@ export interface NodeProps {
 
   position?: PossibleVector2;
   scale?: PossibleVector2;
+
+  x?: number;
+  y?: number;
 }
 
 export class Node {
@@ -31,10 +34,12 @@ export class Node {
   @vector2Accessor(Vector2.one)
   public declare readonly scale: Vector2Accessor;
 
+  @propertyAccessor()
   public get x() {
     return this.position.x;
   }
 
+  @propertyAccessor()
   public get y() {
     return this.position.y;
   }

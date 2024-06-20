@@ -1,3 +1,5 @@
+import {getAllPropertyDescriptors} from '../object';
+
 const META = Symbol.for('@animation-scheme-editor/core/util/accessors/meta');
 
 export function registerAccessor(instance: any, key: string) {
@@ -14,8 +16,17 @@ export function getAccessors(instance: any) {
   const lookup = instance[META] as string[];
   if (!lookup) return {};
 
+  const prototype = Object.getPrototypeOf(instance);
+  const descriptors = getAllPropertyDescriptors(prototype);
+
   return lookup.reduce((acc: Record<string, any>, key) => {
-    if (Object.prototype.hasOwnProperty.call(instance, key)) {
+    const hasProperty = Object.prototype.hasOwnProperty.call(instance, key);
+    const hasDescriptor = Object.prototype.hasOwnProperty.call(
+      descriptors,
+      key,
+    );
+
+    if (hasProperty || hasDescriptor) {
       acc[key] = instance[key];
     }
     return acc;
