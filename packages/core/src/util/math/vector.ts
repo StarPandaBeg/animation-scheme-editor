@@ -1,4 +1,5 @@
-const EPSILON = 1e-6;
+import {EPSILON, RAD2DEG} from '.';
+import {Matrix2D, PossibleMatrix2D} from './matrix';
 
 export type SerializedVector2<T = number> = {
   x: T;
@@ -250,6 +251,23 @@ export class Vector2 {
       Math.abs(this.x - other.x) <= threshold + Number.EPSILON &&
       Math.abs(this.y - other.y) <= threshold + Number.EPSILON
     );
+  }
+
+  public transformAsPoint(matrix: PossibleMatrix2D) {
+    const m = new Matrix2D(matrix);
+
+    return new Vector2(
+      this.x * m.scaleX + this.y * m.skewY + m.translateX,
+      this.x * m.skewX + this.y * m.scaleY + m.translateY,
+    );
+  }
+
+  public static radians(x: number, y: number) {
+    return Math.atan2(y, x);
+  }
+
+  public static degrees(x: number, y: number) {
+    return Vector2.radians(x, y) * RAD2DEG;
   }
 
   public *[Symbol.iterator]() {
