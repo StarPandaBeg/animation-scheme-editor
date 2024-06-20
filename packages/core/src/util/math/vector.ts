@@ -214,6 +214,10 @@ export class Vector2 {
     return `Vector2(${this.x}, ${this.y})`;
   }
 
+  public toStringPoint() {
+    return `(${this.x}, ${this.y})`;
+  }
+
   public toArray() {
     return [this.x, this.y];
   }
