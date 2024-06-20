@@ -1,5 +1,6 @@
 import {ViewportProvider, ViewportState} from '@/contexts/viewport';
 import {useDrag} from '@/hooks/useDrag';
+import {useSize} from '@/hooks/useSize';
 import {constrain} from '@/util/math';
 import {JSX} from 'preact';
 import {useCallback, useMemo, useRef, useState} from 'preact/hooks';
@@ -11,6 +12,8 @@ const ZOOM_MAX = 600;
 
 export default function Viewport() {
   const container = useRef<HTMLDivElement>();
+  const size = useSize(container);
+
   const [position, setPosition] = useState({x: 0, y: 0});
   const [zoom, setZoom] = useState(0.5);
 
@@ -18,8 +21,9 @@ export default function Viewport() {
     return {
       zoom,
       ...position,
+      rect: size,
     };
-  }, [position, zoom]);
+  }, [position, zoom, size]);
 
   const [handleDrag, isDragging] = useDrag(
     useCallback(
