@@ -16,14 +16,16 @@ export default function Viewport() {
 
   const [position, setPosition] = useState({x: 0, y: 0});
   const [zoom, setZoom] = useState(0.5);
+  const [hovered, setHovered] = useState(false);
 
   const state = useMemo<ViewportState>(() => {
     return {
       zoom,
       ...position,
       rect: size,
+      viewportHovered: hovered,
     };
-  }, [position, zoom, size]);
+  }, [position, zoom, size, hovered]);
 
   const [handleDrag, isDragging] = useDrag(
     useCallback(
@@ -63,7 +65,12 @@ export default function Viewport() {
 
   return (
     <ViewportProvider value={state}>
-      <div ref={container} class="viewport">
+      <div
+        ref={container}
+        class="viewport"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <ViewportCanvas
           style={{
             transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,

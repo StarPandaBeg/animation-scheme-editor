@@ -6,6 +6,7 @@ export interface ViewportState {
   y: number;
   rect: DOMRectReadOnly;
   zoom: number;
+  viewportHovered: boolean;
 }
 
 const ViewportContext = createContext<ViewportState>({
@@ -13,6 +14,7 @@ const ViewportContext = createContext<ViewportState>({
   y: 0,
   zoom: 1,
   rect: new DOMRectReadOnly(),
+  viewportHovered: false,
 });
 
 export const ViewportProvider = ViewportContext.Provider;
