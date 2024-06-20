@@ -1,14 +1,27 @@
-import {vector2Accessor} from '../decorators';
+import {propertyAccessor, vector2Accessor} from '../decorators';
 import {BBox, PossibleVector2, Vector2, Vector2Accessor} from '../util';
 import {Node, NodeProps} from './node';
 
 export interface LayoutProps extends NodeProps {
   size?: PossibleVector2;
+
+  width?: number;
+  height?: number;
 }
 
 export class Layout extends Node {
   @vector2Accessor()
   public declare readonly size: Vector2Accessor;
+
+  @propertyAccessor()
+  public get width() {
+    return this.size.x;
+  }
+
+  @propertyAccessor()
+  public get height() {
+    return this.size.y;
+  }
 
   public get leftTop() {
     const offset = this.size().div(2);
