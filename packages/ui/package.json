@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@animation-scheme-editor/2d": "*",
     "@animation-scheme-editor/core": "*",
     "preact": "^10.20.0"
   },

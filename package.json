@@ -7,6 +7,8 @@
   "author": "StarPanda",
   "scripts": {
     "prepare": "husky install",
+    "2d:build": "npm run build -w packages/2d",
+    "2d:dev": "npm run dev -w packages/2d",
     "core:build": "npm run build -w packages/core",
     "core:dev": "npm run dev -w packages/core",
     "ui:build": "npm run build -w packages/ui",

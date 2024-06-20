@@ -22,6 +22,7 @@ export default defineConfig({
       babel: {
         plugins: [['@babel/plugin-proposal-decorators', {legacy: true}]],
       },
+      exclude: [/packages\/2d\/src\/(.*)\.tsx?$/],
     }),
     editorServerPlugin(),
   ],
