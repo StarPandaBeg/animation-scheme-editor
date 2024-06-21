@@ -7,6 +7,7 @@ import AppFooter from './components/app/layout/footer';
 import AppNavigationBar from './components/app/navigation';
 import Viewport from './components/viewport';
 import {ApplicationProvider, Settings} from './contexts/app';
+import {Registry} from './registry';
 
 export function App() {
   const settings: Settings = {
@@ -15,6 +16,7 @@ export function App() {
   };
   const scene = new Scene();
   const player = new Player(scene);
+  const registry = new Registry<Layout>();
 
   return (
     <ApplicationProvider
@@ -22,6 +24,7 @@ export function App() {
         scene,
         player,
         settings,
+        registry,
       }}
     >
       <AppLayout>
