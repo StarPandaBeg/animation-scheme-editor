@@ -4,7 +4,8 @@ import {useCallback, useState} from 'preact/hooks';
 import {useViewportMatrix} from './useViewportMatrix';
 
 export function useViewportPosition(
-  rounded: boolean = false,
+  round: boolean = false,
+  mouseButton: number | null = null,
 ): [Vector2, (event: MouseEvent) => void] {
   const viewport = useViewportContext();
   const matrix = useViewportMatrix();
@@ -13,12 +14,13 @@ export function useViewportPosition(
 
   const setPositionByEvent = useCallback(
     (event: MouseEvent) => {
+      if (mouseButton !== null && event.button !== mouseButton) return;
       const position = new Vector2(
         event.x - viewport.rect.x,
         event.y - viewport.rect.y,
       );
       const transformedPosition = position.transformAsPoint(matrix.inverse());
-      setPosition(rounded ? transformedPosition.rounded : transformedPosition);
+      setPosition(round ? transformedPosition.rounded : transformedPosition);
     },
     [viewport.rect, matrix],
   );
