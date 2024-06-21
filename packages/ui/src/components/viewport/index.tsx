@@ -5,8 +5,9 @@ import {constrain} from '@/util/math';
 import {JSX} from 'preact';
 import {useCallback, useMemo, useRef, useState} from 'preact/hooks';
 import ViewportCanvas from './canvas';
-import {Indicators} from './interactive/indicators';
-import './viewport.scss';
+import {ViewportOverlay} from './overlay';
+
+import './style.scss';
 
 const ZOOM_MIN = 0.1;
 const ZOOM_MAX = 600;
@@ -77,17 +78,14 @@ export default function Viewport() {
             transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
           }}
         />
-        <div
-          className="viewport__overlay"
+        <ViewportOverlay
           onMouseDown={event => {
             if (event.button === 1 || (event.button === 0 && event.shiftKey)) {
               handleDrag(event);
             }
           }}
           onWheel={onWheel}
-        >
-          <Indicators />
-        </div>
+        />
       </div>
     </ViewportProvider>
   );
