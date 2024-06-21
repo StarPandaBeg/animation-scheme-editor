@@ -1,5 +1,5 @@
 import {propertyAccessor, vector2Accessor} from '../decorators';
-import {BBox, PossibleVector2, Vector2, Vector2Accessor} from '../util';
+import {BBox, PossibleVector2, Vector2Accessor} from '../util';
 import {Node, NodeProps} from './node';
 
 export interface LayoutProps extends NodeProps {
@@ -47,13 +47,11 @@ export class Layout extends Node {
 
   public getBBox(): BBox {
     const childrenBBox = this.getChildrenBBox();
-    const thisHasSize = !this.size().exactlyEquals(Vector2.zero);
     const thisBBox = BBox.fromSizeCentered(this.size());
 
-    if (thisHasSize) {
-      thisBBox.position = this.leftTop;
-    }
-    return BBox.fromBBoxes(thisBBox, childrenBBox);
+    const bbox = BBox.fromBBoxes(thisBBox, childrenBBox);
+    bbox.position = bbox.position.add(this.position());
+    return bbox;
   }
 
   protected getChildrenBBox(): BBox {
