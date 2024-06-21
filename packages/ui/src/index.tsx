@@ -1,6 +1,7 @@
 import {render} from 'preact';
 
-import {Player, Scene, Vector2} from '@animation-scheme-editor/core';
+import {WindowsLogo} from '@animation-scheme-editor/2d';
+import {Layout, Player, Scene, Vector2} from '@animation-scheme-editor/core';
 import './assets/sass/style.scss';
 import AppLayout from './components/app/layout';
 import AppFooter from './components/app/layout/footer';
@@ -17,6 +18,15 @@ export function App() {
   const scene = new Scene();
   const player = new Player(scene);
   const registry = new Registry<Layout>();
+
+  const testNode1 = WindowsLogo({position: [(1920 / 3) * 1, 1080 / 2]});
+  const testNode2 = WindowsLogo({position: [(1920 / 3) * 2, 1080 / 2]});
+
+  registry.register(testNode1 as Layout);
+  registry.register(testNode2 as Layout);
+
+  scene.addNode(testNode1);
+  scene.addNode(testNode2);
 
   return (
     <ApplicationProvider
