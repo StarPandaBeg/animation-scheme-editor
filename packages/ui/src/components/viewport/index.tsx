@@ -5,6 +5,7 @@ import {constrain} from '@/util/math';
 import {JSX} from 'preact';
 import {useCallback, useMemo, useRef, useState} from 'preact/hooks';
 import ViewportCanvas from './canvas';
+import {Indicators} from './interactive/indicators';
 import './viewport.scss';
 
 const ZOOM_MIN = 0.1;
@@ -84,7 +85,9 @@ export default function Viewport() {
             }
           }}
           onWheel={onWheel}
-        ></div>
+        >
+          <Indicators />
+        </div>
       </div>
     </ViewportProvider>
   );
